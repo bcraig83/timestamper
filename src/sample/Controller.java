@@ -1,8 +1,9 @@
 package sample;
 
-import static java.time.temporal.ChronoField.EPOCH_DAY;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -19,8 +20,9 @@ public class Controller {
     System.out.println(datePicker.getValue());
 
     LocalDate localDate = datePicker.getValue();
+    LocalDateTime localDateTime = localDate.atTime(LocalTime.MIDNIGHT);
 
-    Long millisecondValue = localDate.getLong(EPOCH_DAY);
+    Long millisecondValue = localDateTime.toEpochSecond(ZoneOffset.UTC);
 
     result.setText(String.valueOf(millisecondValue));
   }
